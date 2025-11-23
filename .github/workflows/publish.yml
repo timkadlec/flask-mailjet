@@ -5,13 +5,13 @@ on:
     tags:
       - "v*"
 
-permissions:
-  id-token: write
-  contents: read
-
 jobs:
   upload:
     runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -24,11 +24,10 @@ jobs:
       - name: Install build tools
         run: pip install build
 
-      - name: Clean old builds
-        run: rm -rf dist build
-
-      - name: Build
+      - name: Build package
         run: python -m build
 
-      - name: Publish
+      - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@v1.8.11
+        with:
+          verbose: true
