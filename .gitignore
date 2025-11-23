@@ -19,3 +19,5 @@ venv/
 
 # uv lockfile (optional for libraries)
 uv.lock
+**/*.egg-info/
+src/*.egg-info/
