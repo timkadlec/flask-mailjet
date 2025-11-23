@@ -20,6 +20,9 @@ jobs:
       - name: Install build tools
         run: pip install build twine
 
+      - name: Remove old builds
+        run: rm -rf dist build
+
       - name: Build
         run: python -m build
 
@@ -27,3 +30,4 @@ jobs:
         uses: pypa/gh-action-pypi-publish@v1.8.11
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
+          packages-dir: dist
